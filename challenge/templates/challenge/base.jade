@@ -1,0 +1,40 @@
+{% load staticfiles %}
+!!! 5
+html
+  head
+    meta( name="viewport", content="width=device-width, initial-scale=1.0")
+    title
+      block titlename
+
+    link(href='{% static "challenge/main.css" %}', rel="stylesheet", media="screen")
+    link(href='{% static "challenge/components/bootstrap/css/bootstrap.min.css" %}', rel="stylesheet", media="screen")
+    script(src='{% static "challenge/components/jquery/jquery.min.js" %}')
+    script(src='{% static "challenge/components/bootstrap/js/bootstrap.min.js" %}')
+    script(src='{% static "challenge/main.js" %}')
+  body
+    .navbar.navbar-inverse.navbar-fixed-top 
+      .navbar-inner
+        .container
+          ul.nav.right
+            li
+              a(href="submit") Submit a New Challenge
+            li
+              a |
+            if user.is_authenticated
+              li
+                a(href="user/{{user.id}}")= user.username
+              li
+                a |
+              li
+                a(href="logout") Logout
+            else
+              li
+                a(href="google/login") Login
+
+
+    #content.container
+      .row-fluid
+        .span12
+          h1#slogon.text-center
+            a(href="/") GLASS CHALLENGE
+      block content

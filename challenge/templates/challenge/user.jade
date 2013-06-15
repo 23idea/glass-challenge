@@ -1,0 +1,12 @@
+extends challenge/base.jade
+
+block content
+  h1= challenge_user.username
+  if user.id == challenge_user.id
+    a(href="{% url 'user_edit' %}") Edit
+  
+  h2 Challenges
+  ul
+    for challenge in challenges
+      li
+        a(href="/details/{{challenge.id}}")= challenge.title  

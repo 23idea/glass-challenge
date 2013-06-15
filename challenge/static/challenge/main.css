@@ -1,0 +1,154 @@
+body{
+  color: black !important;
+}
+a{
+  color: black !important;
+}
+#slogon{
+  font-size: 90.5px;
+  padding-top: 80px;
+  padding-bottom: 20px;
+}
+#un_challenge_list{
+  left: -18px;
+  position: relative;
+  width: 99%;
+}
+.right{
+  float: right !important;
+}
+.controls input{
+  width: 300px
+}
+
+.controls textarea{
+  width: 300px
+}
+
+.voted{
+  color: red
+}
+.row_challenge{
+  padding:5px;
+}
+.row_main{
+  border-style: solid;
+  border-width: 1px;
+  border-color: #7F7F7F;
+  border-left-style: none;
+  margin-left: 0px !important;
+}
+.title a{
+  line-height: 41px;
+  font-size: 24px;
+  padding: 10px;
+}
+.right_info{
+  text-align: center;
+}
+.category{
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: #7F7F7F;
+  border-left-style: solid;
+  border-left-width: 1px;
+  border-left-color: #7F7F7F;
+  background-color: #B2B2B2;
+}
+.category a{
+  color: white !important;
+}
+.count{
+  line-height: 46px;
+  width: 3px !important;
+}
+.down{
+  background-image: url("images/down.jpg");  
+  background-repeat: no-repeat;
+  background-size: 100%;
+  width: 23px;
+  margin-left: 5px !important;
+  height: 20px;
+}
+.down.voted{
+  background-image: url("images/down-vote.jpg");  
+}
+.up{
+  background-image: url("images/up.jpg");  
+  background-repeat: no-repeat;
+  background-size: 100%;
+
+  width: 26px;
+  margin-left: 2px !important;
+  height: 23px;
+}
+.up.voted{
+  background-image: url("images/up-vote.jpg");  
+}
+.complete{
+  color: white;
+}
+.uncomplete{
+  color: white;
+}
+.done_date{
+  background-color: #DA093F;
+}
+.sortby{
+  color: #7F7F7F;
+  padding-top: 5px;
+}
+.start_date{
+  background-color: #04DB78;
+}
+.start_date, .done_date{
+  border-left-style: solid;
+  border-left-width: 1px;
+  border-left-color: #7F7F7F
+}
+.navbar{
+  top: -8px !important;
+}
+.navbar a{
+  color:white !important;
+}
+.navbar-inner{
+  background-image: -webkit-gradient(linear,0 0,0 100%,from(#222),to(black)) !important;
+  background-image: -webkit-linear-gradient(top,#222,black) !important;
+  background-image: -o-linear-gradient(top,#222,black) !important;
+  background-image: linear-gradient(to bottom,#222,black) !important;
+  border-color: black !important;
+  min-height: 0px !important;
+  height: 30px !important;
+}
+#complete{
+  margin-left: 0 !important;
+}
+#uncomplete{
+  border-right-style: solid;
+  border-right-width: 36px;
+  border-right-color: black;
+  width: 49.57777% !important;
+}
+#uncomplete_head{
+  text-align: left;
+  color: white;
+  padding: 3px;
+  background-color: #04DB78;
+  font-style: italic;
+}
+#complete_head{
+  text-align: right;
+  color: white;
+  padding: 3px;
+  background-color: #DA093D;
+  font-style: italic;
+}
+#submit{
+  width: 90px
+}
+#slice{
+  position: absolute;
+  left: 46%;
+  height: 26px;
+}

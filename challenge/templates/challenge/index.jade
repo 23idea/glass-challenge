@@ -1,0 +1,122 @@
+extends challenge/base.jade
+{% load staticfiles %}
+
+block titlename
+  | Glass Challenge
+
+block content
+  img(src='{% static "challenge/images/slice.jpg" %}')#slice
+  .row-fluid
+    #uncomplete.span6
+      #uncomplete_head we would love to see...
+      section
+        .row-fluid
+          .span12.text-center.sortby
+            | sort by:
+            span
+              [
+              a(href="?sort-uncomplete=votecount&dir=d") Vote
+              ]
+            span
+              [
+              a(href="?sort-uncomplete=date_created&dir=d") Newest
+              ]
+            span
+              [
+              a(href="?sort-uncomplete=date_created") Oldest
+              ]
+      ul#un_challenge_list
+        for challenge in uncomplete
+          .row-fluid.row_challenge
+            if challenge.votecount
+              .span1(id="challenge_{{challenge.id}}").count= challenge.votecount
+            else
+              .span1(id="challenge_{{challenge.id}}").count 0
+            .span1
+              if user.is_authenticated
+                if challenge.vote == "up"
+                  div(data-id="{{challenge.id}}", data-dir="up").row.vote.up.voted
+                else
+                  div(data-id="{{challenge.id}}", data-dir="up").row.vote.up
+
+                if challenge.vote == "down"
+                  div(data-id="{{challenge.id}}", data-dir="down").row.vote.down.voted
+                else
+                  div(data-id="{{challenge.id}}", data-dir="down").row.vote.down
+              else
+                div(data-id="{{challenge.id}}", data-dir="up").row.up.login
+                div(data-id="{{challenge.id}}", data-dir="down").row.down.login
+
+            .span10.row_main
+              .row-fluid
+                .span9.title
+                  a(href="{% url 'challenge_details'  challenge.id %}") {{challenge.title}}
+                .span3.right_info
+                  .row.category
+                    a(href="?cat-uncomplete={{challenge.category.id}}").uncomplete {{challenge.category.name}}
+                  .row.start_date.uncomplete 
+                    {{challenge.date_created | date:"SHORT_DATE_FORMAT" }}
+
+    #complete.span6 
+      #complete_head ...experiences through google glass
+      section
+        .row-fluid
+          .span12.text-center.sortby
+            | sort by:
+            span
+              [
+              a(href="?sort-complete=votecount&dir=d") Vote
+              ]
+            span
+              [
+              a(href="?sort-complete=date_created&dir=d") Newest
+              ]
+            span
+              [
+              a(href="?sort-complete=date_created") Oldest
+              ]
+
+      ul#challenge_list
+        for challenge in complete
+          .row-fluid.row_challenge
+            .span1(id="challenge_{{challenge.id}}").count= challenge.votecount
+            .span1
+              if user.is_authenticated
+                if challenge.vote == "up"
+                  div(data-id="{{challenge.id}}", data-dir="up").row.up.vote.voted
+                else
+                  div(data-id="{{challenge.id}}", data-dir="up").row.up.vote 
+
+                if challenge.vote == "down"
+                  div(data-id="{{challenge.id}}", data-dir="down").row.down.vote.voted
+                else
+                  div(data-id="{{challenge.id}}", data-dir="down").row.down.vote
+              else
+                div(data-id="{{challenge.id}}", data-dir="up").row.up.login
+                div(data-id="{{challenge.id}}", data-dir="down").row.down.login
+
+            .span10.row_main
+              .row-fluid
+                .span9.title
+                  a(href="{% url 'challenge_details'  challenge.id %}") {{challenge.title}}
+                .span3.right_info
+                  .row.category
+                    a(href="?cat-uncomplete={{challenge.category.id}}").complete {{challenge.category.name}}
+                  .row.done_date.complete
+                    {{challenge.date_created | date:"SHORT_DATE_FORMAT" }}
+  section.hide
+    h2 Catigories
+    ul#cat_list
+      for cat in categories
+        li 
+          a(href="?catigory={{cat}}") {{cat}}
+
+  .modal.hide.fade#modalLogin
+    .modal-header
+      button(type="button", data-dismiss="modal", aria-hidden="true").close &times;
+      h3 Login
+    .modal-body
+      p you need to login to vote
+    .modal-footer
+      a(data-dismiss="model", aria-hidden="true").btn Close
+      a(href="{% url 'openid-login' %}").btn.btn-primary Login

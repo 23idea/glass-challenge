@@ -1,0 +1,24 @@
+extends challenge/base.jade
+
+block content
+  form(action='.', method='post').form-horizontal {% csrf_token %}
+    legend Submit a Challenge
+    .errors {{form.non_field_errors}}
+    .control-group
+      label(for="id_title").control-label Title:
+      .controls {{form.title}} 
+        span.help-inline {{form.title.errors}}
+
+    .control-group
+      label(for="id_category").control-label Category:
+      .controls {{form.category}}
+        span.help-inline {{form.category.errors}}
+
+    .control-group
+      label(for="id_content").control-label Description:
+      .controls {{form.content}}
+        span.help-inline {{form.content.errors}}
+    
+    .control-group
+      .controls
+        input(type='submit', value='Submit')#submit.btn.regular

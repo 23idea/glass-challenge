@@ -1,0 +1,23 @@
+extends challenge/base.jade
+
+block content
+  form(action='.', method='post').form-horizontal {% csrf_token %}
+    legend Edit you profile
+    .errors {{form.non_field_errors}}
+
+    if user.challenge_user.added_username
+      input(type="hidden", value="{{user.username}}", name="username")#id_username
+    else
+      .control-group
+        label(for="id_claim").control-label User Name:
+        .controls {{form.username}} 
+          span.help-inline {{form.username.errors}}
+
+    .control-group
+      label(for="id_content").control-label Bio:
+      .controls {{form.bio}}
+        span.help-inline {{form.bio.errors}}
+ 
+    .control-group
+      .controls
+        input(type='submit', value='Submit')#submit.btn.regular

@@ -1,0 +1,25 @@
+extends challenge/base.jade
+
+block content
+  form(action='.', method='post').form-horizontal {% csrf_token %}
+    legend Submit a Claim
+      span &nbsp;to {{challenge.title}}
+    .errors {{form.non_field_errors}}
+    .control-group
+      label(for="id_claim").control-label Claim:
+      .controls {{form.content}} 
+        span.help-inline {{form.claim.errors}}
+
+    .control-group
+      label(for="id_content").control-label Proof Url:
+      .controls {{form.proof_url}}
+        span.help-inline {{form.proof_url.errors}}
+    
+    .control-group
+      label(for="id_category").control-label Project Url:
+      .controls {{form.project_url}}
+        span.help-inline {{form.project_url.errors}}
+
+    .control-group
+      .controls
+        input(type='submit', value='Submit')#submit.btn.regular
