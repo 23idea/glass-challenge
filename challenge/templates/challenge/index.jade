@@ -5,10 +5,8 @@ block titlename
   | Glass Challenge
 
 block content
-  img(src='{% static "challenge/images/slice.jpg" %}')#slice
   .row-fluid
     #uncomplete.span6
-      #uncomplete_head we would love to see...
       section
         .row-fluid
           .span12.text-center.sortby
@@ -53,12 +51,11 @@ block content
                   a(href="{% url 'challenge_details'  challenge.id %}") {{challenge.title}}
                 .span3.right_info
                   .row.category
-                    a(href="?cat-uncomplete={{challenge.category.id}}").uncomplete {{challenge.category.name}}
+                    a(href="?cat={{challenge.category.id}}").uncomplete {{challenge.category.name}}
                   .row.start_date.uncomplete 
                     {{challenge.date_created | date:"SHORT_DATE_FORMAT" }}
 
     #complete.span6 
-      #complete_head ...experiences through google glass
       section
         .row-fluid
           .span12.text-center.sortby
@@ -101,7 +98,7 @@ block content
                   a(href="{% url 'challenge_details'  challenge.id %}") {{challenge.title}}
                 .span3.right_info
                   .row.category
-                    a(href="?cat-uncomplete={{challenge.category.id}}").complete {{challenge.category.name}}
+                    a(href="?cat={{challenge.category.id}}").complete {{challenge.category.name}}
                   .row.done_date.complete
                     {{challenge.date_created | date:"SHORT_DATE_FORMAT" }}
   section.hide

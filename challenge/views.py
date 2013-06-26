@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views import generic
 from django.db.models import Sum
 from django.http import HttpResponse, HttpResponseRedirect
+from django.core.urlresolvers import reverse_lazy
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from challenge import models as db
@@ -9,15 +10,18 @@ from challenge import form
 
 
 def index(request):
-    challenges = db.Challenge.objects
-    uncomplete = challenges.filter(status="Uncomplete").annotate(votecount=Sum("vote__direction"))
-    complete = challenges.filter(status="Finished").annotate(votecount=Sum("vote__direction"))
+    
+    if request.user.is_authenticated() and not request.user.challenge_user.added_username:
+        return HttpResponseRedirect(reverse_lazy('user_edit'))
 
-    if request.GET.get("cat-complete"):
-        complete = complete.filter(category__pk=request.GET.get("cat-complete"))
+    challenges = db.Challenge.objects.annotate(votecount=Sum("vote__direction"))
 
-    if request.GET.get("cat-uncomplete"):
-        uncomplete = uncomplete.filter(category__pk=request.GET.get("cat-uncomplete"))
+
+    if request.GET.get("cat"):
+        challenges = challenges.filter(category__pk=request.GET.get("cat"))
+
+    uncomplete = challenges.filter(status="Uncomplete")
+    complete = challenges.filter(status="Finished")
 
     if request.GET.get("sort-complete"):
         if request.GET.get("dir") == "d":
@@ -57,12 +61,13 @@ class UserView(generic.DetailView):
     my challenges
     """
     model = db.User
-    context_object_name = "challenge_user"
+    context_object_name = "cuser"
     template_name = 'challenge/user.jade'
 
     def get_context_data(self, **kwargs):
         context = super(UserView, self).get_context_data(**kwargs)
         context['challenges'] = db.Challenge.objects.filter(author=kwargs['object'])
+        context['claims'] = db.Claim.objects.filter(author=kwargs['object'])
         return context
 
 
@@ -76,6 +81,8 @@ class ChallengeDetail(generic.DetailView):
     def get_context_data(self, **kwargs):
         context = super(ChallengeDetail, self).get_context_data(**kwargs)
         context['claims'] = db.Claim.objects.filter(challenge=kwargs['object'])
+        if db.Claim.objects.filter(author=self.request.user, challenge=kwargs['object']).count():
+            context['has_claim'] = db.Claim.objects.get(author=self.request.user, challenge=kwargs['object']).id
         return context
 
 
@@ -161,7 +168,7 @@ class ProfileUpdate(generic.View):
         profileForm = form.ProfileForm(request.POST, instance=request.user.challenge_user)
         if profileForm.is_valid():
             model = profileForm.save()
-            return HttpResponseRedirect("/")
+            return HttpResponseRedirect("/user/"+str(request.user.id))
         else:
             return render_to_response(
                 'challenge/user_form.jade',

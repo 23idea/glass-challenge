@@ -1,23 +1,36 @@
 extends challenge/base.jade
 
 block content
-  h1= challenge.title
-  h2 Content
-  div= challenge.content
-  h2 Author
-  div
-    a(href="{% url 'user' challenge.author.id %}")= challenge.author
-  h2 Status
-  div= challenge.status
-  h2 Category
-  div= challenge.category
+  .row-fluid
+    .span6
+      h1= challenge.title
+      a(href="{% url 'user' challenge.author.id %}")
+        span 
+          strong Submitted by:
+          {{challenge.author}}
+      br
+      a(href="/?cat={{challenge.category.id}}")
+        span 
+          strong Category:
+          {{challenge.category}} 
+      br
+      span
+        strong Status:
+        {{challenge.status}}
+      br
+      br
+      .well= challenge.content
 
-  if user.id == challenge.author.id
-    a(href="{% url 'challenge_edit' challenge.id %}") Edit
+      if user.id == challenge.author.id
+        a(href="{% url 'challenge_edit' challenge.id %}").btn Edit
 
-  h1 Claims
-  ul
-    for claim in claims
-      li
-        a(href="{% url 'claim_details' claim.id %}")= claim.content
-  a(href="{% url 'claim_submit' challenge.id %}") Submit Claim
+    .span6
+      h1 Claims
+      ul
+        for claim in claims
+          li
+            a(href="{% url 'claim_details' claim.id %}")= claim.content
+      if has_claim
+        a(href="{% url 'claim_details' has_claim %}").btn View Your Claim
+      else
+        a(href="{% url 'claim_submit' challenge.id %}").btn A Submit A Claim

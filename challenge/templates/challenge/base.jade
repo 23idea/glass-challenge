@@ -17,19 +17,19 @@ html
         .container
           ul.nav.right
             li
-              a(href="submit") Submit a New Challenge
+              a(href="{% url 'challenge_submit' %}") Submit a New Challenge
             li
               a |
             if user.is_authenticated
               li
-                a(href="user/{{user.id}}")= user.username
+                a(href="{% url 'user' user.id %}")= user.username
               li
                 a |
               li
-                a(href="logout") Logout
+                a(href="{% url 'logout' %}") Logout
             else
               li
-                a(href="google/login") Login
+                a(href="{% url 'openid-login' %}") Login
 
 
     #content.container
@@ -37,4 +37,12 @@ html
         .span12
           h1#slogon.text-center
             a(href="/") GLASS CHALLENGE
+
+      img(src='{% static "challenge/images/slice.jpg" %}')#slice
+      .row-fluid
+        .span6.sub_slogon
+          #uncomplete_head we would love to see...
+
+        .span6.sub_slogon
+          #complete_head ...experiences through google glass
       block content

@@ -5,7 +5,7 @@ from challenge import models as db
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = db.Challenge_User
-        fields = ['bio']
+        fields = ['bio', 'homepage_url']
 
     username = forms.RegexField(
         label="Username", max_length=30, regex=r'^[a-zA-Z0-9]{3,30}$',

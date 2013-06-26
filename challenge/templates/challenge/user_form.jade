@@ -19,5 +19,11 @@ block content
         span.help-inline {{form.bio.errors}}
  
     .control-group
+      label(for="id_content").control-label Profile Url:
+      .controls
+        input(maxlength="200", name="homepage_url", type="text", value="{{form.homepage_url.value}}")#id_homepage_url 
+        span.help-inline {{form.homepage_url.errors}}
+
+    .control-group
       .controls
         input(type='submit', value='Submit')#submit.btn.regular

@@ -1,12 +1,27 @@
 extends challenge/base.jade
 
 block content
-  h1= challenge_user.username
-  if user.id == challenge_user.id
-    a(href="{% url 'user_edit' %}") Edit
-  
-  h2 Challenges
-  ul
-    for challenge in challenges
-      li
-        a(href="/details/{{challenge.id}}")= challenge.title  
+  .row-fluid
+    .span6
+      h1= cuser.username
+      if cuser.challenge_user.homepage_url != ""
+        h4
+          a(href="{{ cuser.challenge_user.homepage_url }}") Home Page
+      .well= cuser.challenge_user.bio
+      if user.id == cuser.id
+        a(href="{% url 'user_edit' %}").btn Edit
+
+    .span6
+      if challenges.count
+        h2 Challenges Submitted
+        ul
+          for challenge in challenges
+            li
+              a(href="{% url 'challenge_details' challenge.id %}")= challenge.title  
+
+      if claims.count
+        h2 Claims Submitted
+        ul
+          for claim in claims
+            li
+              a(href="{% url 'claim_details' claim.id %}")= claim.challenge.title

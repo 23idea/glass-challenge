@@ -5,9 +5,12 @@ a{
   color: black !important;
 }
 #slogon{
-  font-size: 90.5px;
   padding-top: 80px;
   padding-bottom: 20px;
+  font: 112px/28px 'SourceSansProItalic', Arial, sans-serif;
+}
+.sub_slogon{
+  min-height: 0px !important;
 }
 #un_challenge_list{
   left: -18px;
@@ -152,3 +155,15 @@ a{
   left: 46%;
   height: 26px;
 }
+@font-face {
+    font-family: 'SourceSansProItalic';
+    src: url('source-sans-pro-fontfacekit/SourceSansPro-It-webfont.eot');
+    src: url('source-sans-pro-fontfacekit/SourceSansPro-It-webfont.eot?#iefix') format('embedded-opentype'),
+         url('source-sans-pro-fontfacekit/SourceSansPro-It-webfont.woff') format('woff'),
+         url('source-sans-pro-fontfacekit/SourceSansPro-It-webfont.ttf') format('truetype'),
+         url('source-sans-pro-fontfacekit/SourceSansPro-It-webfont.svg#SourceSansProItalic') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+

@@ -11,13 +11,15 @@ block content
         span.help-inline {{form.claim.errors}}
 
     .control-group
-      label(for="id_content").control-label Proof Url:
-      .controls {{form.proof_url}}
+      label(for="id_proof_url").control-label Proof Url:
+      .controls
+        input(maxlength="200", name="proof_url", type="text", value="{{form.proof_url.value}}")#id_proof_url 
         span.help-inline {{form.proof_url.errors}}
     
     .control-group
-      label(for="id_category").control-label Project Url:
-      .controls {{form.project_url}}
+      label(for="id_project_url").control-label Project Url:
+      .controls
+        input(maxlength="200", name="project_url", type="text", value="{{form.project_url.value}}")#id_project_url 
         span.help-inline {{form.project_url.errors}}
 
     .control-group

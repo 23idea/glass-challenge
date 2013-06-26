@@ -7,6 +7,10 @@ from autoslug import AutoSlugField
 class Challenge_User(models.Model):
     user = models.OneToOneField(User)
     bio = models.TextField(default="please add some content here")
+    homepage_url = models.URLField(
+        blank=True,
+        default=""
+    )
     added_username = models.BooleanField(default=False)
 
 
@@ -76,10 +80,12 @@ class Claim(models.Model):
         default="please add some content here",
         help_text="""Tell us about your claim""")
     project_url = models.URLField(
-        blank=True
+        blank=True,
+        default=""
     )
     proof_url = models.URLField(
-        blank=False
+        blank=False,
+        default=""
     )
     status = models.CharField(
         max_length=32,
