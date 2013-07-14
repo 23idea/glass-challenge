@@ -95,7 +95,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = '#7g4%xe+9dr)xqrhb_!4uv34=3ewntojv)_e5rl2b&s8t(0o80'
+SECRET_KEY = 'kittens!'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -176,3 +176,8 @@ LOGGING = {
         },
     }
 }
+
+try:
+    from settings_local import *
+except ImportError, e:
+    pass
