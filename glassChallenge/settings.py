@@ -26,7 +26,7 @@ LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/google/login/'
 LOGOUT_URL = '/logout/'
 OPENID_SSO_SERVER_URL = 'https://www.google.com/accounts/o8/id'
-INTERNAL_IPS = ('127.0.0.1','192.168.56.1')
+INTERNAL_IPS = ('127.0.0.1')
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
@@ -110,7 +110,6 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -145,8 +144,7 @@ INSTALLED_APPS = (
     'django_openid_auth',
     'south',
     'autoslug',
-    'challenge',
-    'debug_toolbar'
+    'challenge'
 )
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
