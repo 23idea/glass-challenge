@@ -32,7 +32,7 @@ class Challenge(models.Model):
     author = models.ForeignKey(User)
     title = models.CharField(
         unique=True,
-        max_length=255,
+        max_length=25,
         help_text="""the name of the title""")
     slug = AutoSlugField(
         populate_from='title',

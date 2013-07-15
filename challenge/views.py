@@ -81,7 +81,8 @@ class ChallengeDetail(generic.DetailView):
     def get_context_data(self, **kwargs):
         context = super(ChallengeDetail, self).get_context_data(**kwargs)
         context['claims'] = db.Claim.objects.filter(challenge=kwargs['object'])
-        if db.Claim.objects.filter(author=self.request.user, challenge=kwargs['object']).count():
+        #check if use has a claim on  this challenge yet
+        if self.request.user.is_authenticated() and db.Claim.objects.filter(author=self.request.user, challenge=kwargs['object']).count():
             context['has_claim'] = db.Claim.objects.get(author=self.request.user, challenge=kwargs['object']).id
         return context
 
