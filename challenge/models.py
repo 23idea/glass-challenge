@@ -6,7 +6,7 @@ from autoslug import AutoSlugField
 
 class Challenge_User(models.Model):
     user = models.OneToOneField(User)
-    bio = models.TextField(default="please add some content here")
+    bio = models.TextField()
     homepage_url = models.URLField(
         blank=True,
         default=""
@@ -39,8 +39,7 @@ class Challenge(models.Model):
         unique=True)
     content = models.TextField(
         blank=False,
-        default="please add some content here",
-        help_text="""The contents of the article in Markdown.""")
+        help_text="""please add some content here""")
     category = models.ForeignKey(Category)
     status = models.CharField(
         max_length=32,
@@ -77,7 +76,6 @@ class Claim(models.Model):
     challenge = models.ForeignKey(Challenge)
     author = models.ForeignKey(User)
     content = models.TextField(
-        default="please add some content here",
         help_text="""Tell us about your claim""")
     project_url = models.URLField(
         blank=True,
@@ -121,7 +119,7 @@ class Award(models.Model):
         max_length=255,
         help_text="""the name of the title""")
     about = models.TextField(
-        default="please add some content here",
+        default="",
         help_text="""The contents of the article in Markdown.""")
     icon = models.CharField(max_length=255)
 

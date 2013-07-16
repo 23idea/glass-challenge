@@ -7,7 +7,7 @@ block content
         a(href="{% url 'challenge_details' claim.challenge.id %}") Claim for {{claim.challenge.title}}
 
       h5
-        a(href="{{claim.proof_url}}") View Proof
+        a(href="{{claim.proof_url}}")#proof View Proof
         if claim.project_url
           &nbsp;|
           a(href="{{claim.project_url}}") View Project's Site

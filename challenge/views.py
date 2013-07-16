@@ -91,9 +91,9 @@ class ChallengeCreate(generic.CreateView):
     """
     submit a new challenge
     """
-    model = db.Challenge
     template_name = 'challenge/challenge_form.jade'
-    fields = ["title", "content", "category"]
+    form_class = form.ChallengeForm
+    model = db.Challenge
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -127,8 +127,8 @@ class ClaimCreate(generic.CreateView):
     submit a new challenge
     """
     model = db.Claim
-    fields = ['content', 'proof_url', 'project_url']
     template_name = 'challenge/claim_form.jade'
+    form_class = form.ClaimForm
 
     def get_context_data(self, **kwargs):
         context = super(ClaimCreate, self).get_context_data(**kwargs)
