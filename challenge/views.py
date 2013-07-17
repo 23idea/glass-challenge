@@ -24,7 +24,7 @@ def index(request):
 
     if request.GET.get("sort-complete"):
         if request.GET.get("sort-complete") == "votecount":
-            complete = complete.filter(votecount__isnull = False)
+            complete = complete.filter(votecount__isnull=False)
 
         if request.GET.get("dir") == "d":
             complete = complete.order_by("-"+request.GET.get("sort-complete"))
@@ -33,7 +33,7 @@ def index(request):
 
     if request.GET.get("sort-uncomplete"):
         if request.GET.get("sort-uncomplete") == "votecount":
-            uncomplete = uncomplete.filter(votecount__isnull = False)
+            uncomplete = uncomplete.filter(votecount__isnull=False)
         if request.GET.get("dir") == "d":
             uncomplete = uncomplete.order_by("-"+request.GET.get("sort-uncomplete"))
         else:
@@ -84,7 +84,9 @@ class ChallengeDetail(generic.DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(ChallengeDetail, self).get_context_data(**kwargs)
-        context['claims'] = db.Claim.objects.filter(challenge=kwargs['object'])
+        context['claims_pending'] = db.Claim.objects.filter(challenge=kwargs['object'], status="Pending" )
+
+        context['claims_accepted'] = db.Claim.objects.filter(challenge=kwargs['object'], status="Accepted" )
         #check if use has a claim on  this challenge yet
         if self.request.user.is_authenticated() and db.Claim.objects.filter(author=self.request.user, challenge=kwargs['object']).count():
             context['has_claim'] = db.Claim.objects.get(author=self.request.user, challenge=kwargs['object']).id

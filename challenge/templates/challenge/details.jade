@@ -26,10 +26,20 @@ block content
 
     .span6
       h1 Claims
+      if claims_accepted
+        h2 confirmed
       ul
-        for claim in claims
+        for claim in claims_accepted
           li
             a(href="{% url 'claim_details' claim.id %}")= claim.content
+
+      if claims_pending
+        h2 unconfirmed
+      ul
+        for claim in claims_pending
+          li
+            a(href="{% url 'claim_details' claim.id %}")= claim.content
+
       if has_claim
         a(href="{% url 'claim_details' has_claim %}").btn View Your Claim
       else
