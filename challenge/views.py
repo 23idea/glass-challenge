@@ -16,7 +16,6 @@ def index(request):
 
     challenges = db.Challenge.objects.annotate(votecount=Sum("vote__direction"))
 
-
     if request.GET.get("cat"):
         challenges = challenges.filter(category__pk=request.GET.get("cat"))
 
@@ -24,12 +23,17 @@ def index(request):
     complete = challenges.filter(status="Finished")
 
     if request.GET.get("sort-complete"):
+        if request.GET.get("sort-complete") == "votecount":
+            complete = complete.filter(votecount__isnull = False)
+
         if request.GET.get("dir") == "d":
             complete = complete.order_by("-"+request.GET.get("sort-complete"))
         else:
             complete = complete.order_by(request.GET.get("sort-complete"))
 
     if request.GET.get("sort-uncomplete"):
+        if request.GET.get("sort-uncomplete") == "votecount":
+            uncomplete = uncomplete.filter(votecount__isnull = False)
         if request.GET.get("dir") == "d":
             uncomplete = uncomplete.order_by("-"+request.GET.get("sort-uncomplete"))
         else:

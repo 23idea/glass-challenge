@@ -23,8 +23,8 @@ class Category(models.Model):
     def __unicode__(self):
         return str(self.name)
 
-
 class Challenge(models.Model):
+    
     status_choices = (
         ("Finished", "Finished"),
         ("Uncomplete", "Uncomplete")
