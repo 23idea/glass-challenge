@@ -1,26 +1,31 @@
 extends challenge/base.jade
+{% load staticfiles %}
 
 block content
+
+  script(src='{% static "challenge/js/claim.js" %}')
   .row-fluid
     .span12
-      h2 
-        a(href="{% url 'challenge_details' claim.challenge.id %}") Claim for {{claim.challenge.title}}
+      .row-fluid
+        .span6
+          h2 
+            a(href="{% url 'challenge_details' claim.challenge.id %}") Claim for {{claim.challenge.title}}
 
-      h5
-        a(href="{{claim.proof_url}}")#proof View Proof
-        if claim.project_url
-          &nbsp;|
-          a(href="{{claim.project_url}}") View Project's Site
-      a(href="{% url 'user' claim.author.id %}")
-        span 
-          strong submitted by:
-          {{claim.author}}
-      br
-      span 
-        strong status:
-        {{claim.status}}
-      br
-      div.well= claim.content 
+        .span6.info
+          a(href="{% url 'user' claim.author.id %}")
+            span 
+              strong submitted by:
+              {{claim.author}}
+          br
+          span 
+            strong status:
+            {{claim.status}}
+      div.well#claim_content= claim.content 
+        h5
+          a(href="{{claim.proof_url}}")#proof View Proof
+          if claim.project_url
+            &nbsp;|
+            a(href="{{claim.project_url}}") View Project's Site
 
       if user.id == claim.author.id
         a(href="{% url 'claim_edit' claim.id %}").btn Edit
