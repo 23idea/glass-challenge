@@ -132,7 +132,7 @@ a{
 }
 #uncomplete{
   border-right-style: solid;
-  border-right-width: 36px;
+  border-right-width: 35.3px;
   border-right-color: black;
   width: 49.57777% !important;
 }
@@ -154,9 +154,10 @@ a{
   width: 90px
 }
 #slice{
-  position: absolute;
-  left: 46%;
+  position: relative;
+  left: 44.1%;
   height: 26px;
+  top: 26px;
 }
 @font-face {
     font-family: 'SourceSansProItalic';
