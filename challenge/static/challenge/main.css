@@ -7,7 +7,8 @@ a{
 #slogon{
   padding-top: 80px;
   padding-bottom: 20px;
-  font: 112px/28px 'SourceSansProItalic', Arial, sans-serif;
+  font: 112px/28px 'geometry_soft_probold_n', Arial, sans-serif;
+  font-size: 100px;
 }
 .sub_slogon{
   min-height: 0px !important;
@@ -192,14 +193,15 @@ a{
   top: 26px;
 }
 @font-face {
-    font-family: 'SourceSansProItalic';
-    src: url('source-sans-pro-fontfacekit/SourceSansPro-It-webfont.eot');
-    src: url('source-sans-pro-fontfacekit/SourceSansPro-It-webfont.eot?#iefix') format('embedded-opentype'),
-         url('source-sans-pro-fontfacekit/SourceSansPro-It-webfont.woff') format('woff'),
-         url('source-sans-pro-fontfacekit/SourceSansPro-It-webfont.ttf') format('truetype'),
-         url('source-sans-pro-fontfacekit/SourceSansPro-It-webfont.svg#SourceSansProItalic') format('svg');
+    font-family: 'geometry_soft_probold_n';
+    src: url('geometrysoftpro_boldn_macroman/Geometry_Soft_Pro-Bold_N-webfont.eot');
+    src: url('geometrysoftpro_boldn_macroman/Geometry_Soft_Pro-Bold_N-webfont.eot?#iefix') format('embedded-opentype'),
+         url('geometrysoftpro_boldn_macroman/Geometry_Soft_Pro-Bold_N-webfont.woff') format('woff'),
+         url('geometrysoftpro_boldn_macroman/Geometry_Soft_Pro-Bold_N-webfont.ttf') format('truetype'),
+         url('geometrysoftpro_boldn_macroman/Geometry_Soft_Pro-Bold_N-webfont.svg#geometry_soft_probold_n') format('svg');
     font-weight: normal;
     font-style: normal;
+
 }
 
 
