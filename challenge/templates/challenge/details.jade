@@ -55,7 +55,7 @@ block content
                 a(href="{% url 'claim_edit' claim.id %}").btn Edit
       if claims_pending
         h2 unconfirmed
-        for claim in claims_accepted
+        for claim in claims_pending
           .row-fluid
             .span12
               .row-fluid
