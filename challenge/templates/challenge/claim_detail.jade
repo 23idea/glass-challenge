@@ -3,7 +3,17 @@ extends challenge/base.jade
 
 block content
 
+  .modal.hide.fade#modalThanks
+    .modal-header
+      button(type="button", data-dismiss="modal", aria-hidden="true").close &times;
+      h3 Thank You!
+    .modal-body
+      p Thank you for posting!
+    .modal-footer
+      button(data-dismiss="modal", aria-hidden="true").btn Close
+  
   script(src='{% static "challenge/js/claim.js" %}')
+  script(src='{% static "challenge/js/query.js" %}')
   .row-fluid
     .span12
       .row-fluid

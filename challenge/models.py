@@ -41,6 +41,7 @@ class Challenge(models.Model):
         unique=True)
     content = models.TextField(
         blank=False,
+        max_length="300",
         help_text="""please add some content here""")
     category = models.ForeignKey(Category)
     status = models.CharField(
@@ -79,12 +80,14 @@ class Claim(models.Model):
     status_choices = (
         ("Accepted", "Accepted"),
         ("Rejected", "Rejected"),
-        ("Pending", "Pending")
+        ("Pending", "Pending approval")
     )
     challenge = models.ForeignKey(Challenge)
     author = models.ForeignKey(User)
     content = models.TextField(
-        help_text="""Tell us about your claim""")
+        help_text="""Tell us about your claim""",
+        max_length="300"
+        )
     project_url = models.URLField(
         blank=True,
         default=""

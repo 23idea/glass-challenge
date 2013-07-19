@@ -3,7 +3,17 @@ extends challenge/base.jade
 
 block content
 
+  .modal.hide.fade#modalThanks
+    .modal-header
+      button(type="button", data-dismiss="modal", aria-hidden="true").close &times;
+      h3 Thank You!
+    .modal-body
+      p Thank you for posting!
+    .modal-footer
+      button(data-dismiss="modal", aria-hidden="true").btn Close
+
   script(src='{% static "challenge/js/claim.js" %}')
+  script(src='{% static "challenge/js/query.js" %}')
   .row-fluid
     .span6
       h1= challenge.title
@@ -67,7 +77,10 @@ block content
                   br
                   span 
                     strong status: 
-                    {{claim.status}}
+                    if claim.status == "Pending"
+                      Pending approval
+                    else
+                      {{claim.status}}
               div.well.claim_content= claim.content 
                 h5
                   a(href="{{claim.proof_url}}").proof View Proof

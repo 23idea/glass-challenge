@@ -3,6 +3,7 @@ from django.views import generic
 from django.db.models import Sum
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse_lazy
+from django.views.generic.base import View
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from challenge import models as db
@@ -59,8 +60,13 @@ def index(request):
         'categories': categories
     })
 
+class CheckView(View):
+    def dispatch(self, *args, **kwargs):
+        if self.request.user.is_authenticated() and not self.request.user.challenge_user.added_username:
+            return HttpResponseRedirect(reverse_lazy('user_edit'))
+        return super(CheckView, self).dispatch(*args, **kwargs)
 
-class UserView(generic.DetailView):
+class UserView(CheckView, generic.DetailView):
     """
     my challenges
     """
@@ -75,12 +81,18 @@ class UserView(generic.DetailView):
         return context
 
 
-class ChallengeDetail(generic.DetailView):
+class ChallengeDetail(CheckView, generic.DetailView):
     """
     details on a challenge
     """
     model = db.Challenge
     template_name = 'challenge/details.jade'
+
+
+    def dispatch(self, *args, **kwargs):
+        if self.request.user.is_authenticated() and not self.request.user.challenge_user.added_username:
+            return HttpResponseRedirect(reverse_lazy('user_edit'))
+        return super(ChallengeDetail, self).dispatch(*args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super(ChallengeDetail, self).get_context_data(**kwargs)
@@ -93,7 +105,7 @@ class ChallengeDetail(generic.DetailView):
         return context
 
 
-class ChallengeCreate(generic.CreateView):
+class ChallengeCreate(CheckView, generic.CreateView):
     """
     submit a new challenge
     """
@@ -101,12 +113,15 @@ class ChallengeCreate(generic.CreateView):
     form_class = form.ChallengeForm
     model = db.Challenge
 
+    def get_success_url(self):
+        return self.object.get_absolute_url() + "?thanks=true"
+
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super(ChallengeCreate, self).form_valid(form)
 
 
-class ChallengeUpdate(generic.UpdateView):
+class ChallengeUpdate(CheckView, generic.UpdateView):
     """
     edit challenge
     reate a form instance with POST data.
@@ -123,18 +138,21 @@ class ChallengeUpdate(generic.UpdateView):
         return self.object.get_absolute_url()
 
 
-class ClaimDetail(generic.DetailView):
+class ClaimDetail(CheckView, generic.DetailView):
     template_name = 'challenge/claim_detail.jade'
     model = db.Claim
 
 
-class ClaimCreate(generic.CreateView):
+class ClaimCreate(CheckView, generic.CreateView):
     """
     submit a new challenge
     """
     model = db.Claim
     template_name = 'challenge/claim_form.jade'
     form_class = form.ClaimForm
+
+    def get_success_url(self):
+        return self.object.get_absolute_url() + "?thanks=true"
 
     def get_context_data(self, **kwargs):
         context = super(ClaimCreate, self).get_context_data(**kwargs)
@@ -148,7 +166,7 @@ class ClaimCreate(generic.CreateView):
         return super(ClaimCreate, self).form_valid(form)
 
 
-class ClaimUpdate(generic.UpdateView):
+class ClaimUpdate(CheckView, generic.UpdateView):
     """
     edit challenge
     reate a form instance with POST data.
@@ -191,7 +209,7 @@ class ProfileUpdate(generic.View):
             context_instance=RequestContext(request))
 
 
-class ClaimDelete(generic.DeleteView):
+class ClaimDelete(CheckView, generic.DeleteView):
     """
     delete challenge
     """

@@ -7,3 +7,6 @@ $(document).ready (e)->
     iframe = document.createElement('iframe')
     iframe.src = url + yt_id
     $(link).parent().parent().append(iframe)
+
+  if QueryString.thanks
+    $("#modalThanks").modal()
