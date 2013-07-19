@@ -19,16 +19,16 @@ block content
       h1= challenge.title
       a(href="{% url 'user' challenge.author.id %}")
         span 
-          strong Submitted by:
+          strong Submitted by:&nbsp;
           {{challenge.author}}
       br
       a(href="/?cat={{challenge.category.id}}")
         span 
-          strong Category:
+          strong Category:&nbsp;
           {{challenge.category}} 
       br
       span
-        strong Status:
+        strong Status:&nbsp;
         {{challenge.status}}
       br
       br
@@ -63,6 +63,10 @@ block content
 
               if user.id == claim.author.id
                 a(href="{% url 'claim_edit' claim.id %}").btn Edit
+              else
+                if challenge.status == "Finished"
+                  a(href="{% url 'claim_submit' challenge.id %}").btn Call em out
+
       if claims_pending
         h2 unconfirmed
         for claim in claims_pending
@@ -91,7 +95,12 @@ block content
               if user.id == claim.author.id
                 a(href="{% url 'claim_edit' claim.id %}").btn Edit
 
-      if has_claim
-        //nothing 
-      else
-        a(href="{% url 'claim_submit' challenge.id %}").btn A Submit A Claim
+
+      if challenge.status != "Finished"
+        if has_claim
+          //nothing 
+        else
+          a(href="{% url 'claim_submit' challenge.id %}").btn A Submit A Claim
+
+
+
