@@ -50,10 +50,6 @@ block content
                     span 
                       strong submitted by: 
                       {{claim.author}}
-                  br
-                  span 
-                    strong status: 
-                    {{claim.status}}
               div.well.claim_content= claim.content 
                 h5
                   a(href="{{claim.proof_url}}").proof View Proof
@@ -78,13 +74,6 @@ block content
                     span 
                       strong submitted by: 
                       {{claim.author}}
-                  br
-                  span 
-                    strong status: 
-                    if claim.status == "Pending"
-                      Pending approval
-                    else
-                      {{claim.status}}
               div.well.claim_content= claim.content 
                 h5
                   a(href="{{claim.proof_url}}").proof View Proof

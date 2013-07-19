@@ -24,12 +24,15 @@ block content
         .span6.info
           a(href="{% url 'user' claim.author.id %}")
             span 
-              strong submitted by:
+              strong submitted by:&nbsp;
               {{claim.author}}
           br
           span 
-            strong status:
-            {{claim.status}}
+            strong status:&nbsp;
+            if claim.status == "Pending"
+              | Pending approval
+            else
+              {{claim.status}}
       div.well#claim_content= claim.content 
         h5
           a(href="{{claim.proof_url}}")#proof View Proof
