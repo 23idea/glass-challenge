@@ -38,11 +38,16 @@ html
           h1#slogon.text-center
             a(href="/") GLASS CHALLENGE
 
-      img(src='{% static "challenge/images/slice.jpg" %}')#slice
       .row-fluid
-        .span6.sub_slogon
-          #uncomplete_head we would love to see...
+        .span5.sub_slogon
+          #uncomplete_head
+            span 
+              | we would love to see...
+
+        .span1#skew
 
         .span6.sub_slogon
-          #complete_head ...experiences through google glass
+          #complete_head
+            span
+              | ...experiences through google glass
       block content

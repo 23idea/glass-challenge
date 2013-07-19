@@ -178,24 +178,48 @@ a{
   text-align: left;
   color: white;
   padding: 3px;
-  background-color: #04DB78;
   font-style: italic;
+
+  width: 413px;
+  border-right: 30px solid transparent;
+  border-top: 30px solid #04DB78;
+  height: 0;
+  top: 6px;
+  position: relative;
+}
+#uncomplete_head span{
+  position: relative;
+  top: -29px;
 }
 #complete_head{
   text-align: right;
   color: white;
   padding: 3px;
-  background-color: #DA093D;
   font-style: italic;
+  line-height: 38px;
+  width: 411px;
+  position: relative;
+  right: -24px;
+
+  border-left: 30px solid transparent;
+  border-bottom: 30px solid #DA093D;
+  height: 0;
+
 }
 #submit{
   width: 90px
 }
-#slice{
+#skew{
+  width: 35px;
+  height: 27px;
+  background-color: black;
+  transform: skew(-45deg,30deg);
+  -ms-transform: skew(-45deg,30deg);
+  -webkit-transform: skew(-45deg, 0deg);
+  float: left;
+  top: 6px;
   position: relative;
-  left: 44.2%;
-  height: 26px;
-  top: 25.9px;
+  right: -45.5px;
 }
 @font-face {
     font-family: 'geometry_soft_probold_n';
