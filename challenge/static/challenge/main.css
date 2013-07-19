@@ -10,6 +10,11 @@ a{
   font: 112px/28px 'geometry_soft_probold_n', Arial, sans-serif;
   font-size: 100px;
 }
+#slogon a:hover
+{
+  text-decoration: none;
+}
+
 .sub_slogon{
   min-height: 0px !important;
 }
