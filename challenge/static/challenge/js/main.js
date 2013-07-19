@@ -53,7 +53,9 @@
         newImg = document.createElement('img');
         newImg.src = url + yt_id + "/default.jpg";
         newImg.className = "proof_thumb";
-        _results.push($(link).parent().prepend(newImg));
+        $(link).parent().prepend(newImg);
+        $(link).parent().parent().find(".challenge_content").addClass("challenge_content_thumb");
+        _results.push($(link).parent().parent().find(".challenge_title").addClass("challenge_title_thumb"));
       } else {
         _results.push(void 0);
       }
