@@ -41,8 +41,10 @@ a{
   border-left-style: none;
   margin-left: 0px !important;
 }
+.title{
+  padding-right: 14px;
+}
 .title a{
-  line-height: 41px;
   font-size: 17px;
   padding: 10px;
 }
@@ -60,6 +62,21 @@ a{
 }
 .category a{
   color: white !important;
+}
+.challenge_title{
+  float: left;
+}
+.challenge_content{
+  white-space: nowrap;  
+  overflow: hidden;
+  text-overflow: ellipsis;
+  top: 9px;
+  position: relative;
+  color: #7F7F7F;
+
+}
+.thumbnail_holder{
+  float: left;
 }
 .count{
   line-height: 46px;

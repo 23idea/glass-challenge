@@ -23,16 +23,18 @@ class Category(models.Model):
     def __unicode__(self):
         return str(self.name)
 
+
 class Challenge(models.Model):
     
     status_choices = (
         ("Finished", "Finished"),
         ("Uncomplete", "Uncomplete")
     )
+
     author = models.ForeignKey(User)
     title = models.CharField(
         unique=True,
-        max_length=25,
+        max_length=30,
         help_text="""the name of the title""")
     slug = AutoSlugField(
         populate_from='title',
@@ -56,6 +58,12 @@ class Challenge(models.Model):
             return 0
         else:
             return total['direction__sum']
+
+    def get_thumbnail(self):
+        claim = self.claim_set.filter(status="Accepted")
+        if claim.first():
+            return claim[0].proof_url
+        return False
 
     def __unicode__(self):
         return str(self.title)

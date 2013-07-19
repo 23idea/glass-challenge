@@ -48,7 +48,9 @@ block content
             .span10.row_main
               .row-fluid
                 .span9.title
-                  a(href="{% url 'challenge_details'  challenge.id %}") {{challenge.title}}
+                  span
+                  a(href="{% url 'challenge_details'  challenge.id %}").challenge_title= challenge.title
+                  div.challenge_content= challenge.content
                 .span3.right_info
                   .row.category
                     a(href="?cat={{challenge.category.id}}").uncomplete {{challenge.category.name}}
@@ -95,7 +97,10 @@ block content
             .span10.row_main
               .row-fluid
                 .span9.title
-                  a(href="{% url 'challenge_details'  challenge.id %}") {{challenge.title}}
+                  span.thumbnail_holder
+                    .yt_link.hide= challenge.get_thumbnail
+                  a(href="{% url 'challenge_details'  challenge.id %}").challenge_title= challenge.title
+                  div.challenge_content= challenge.content
                 .span3.right_info
                   .row.category
                     a(href="?cat={{challenge.category.id}}").complete {{challenge.category.name}}

@@ -10,7 +10,7 @@ from challenge import form
 
 
 def index(request):
-    
+
     if request.user.is_authenticated() and not request.user.challenge_user.added_username:
         return HttpResponseRedirect(reverse_lazy('user_edit'))
 
@@ -21,7 +21,7 @@ def index(request):
 
     uncomplete = challenges.filter(status="Uncomplete")
     complete = challenges.filter(status="Finished")
-
+   
     if request.GET.get("sort-complete"):
         if request.GET.get("sort-complete") == "votecount":
             complete = complete.filter(votecount__isnull=False)
