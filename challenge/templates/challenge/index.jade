@@ -98,7 +98,7 @@ block content
 
             .span10.row_main
               .row-fluid
-                span.thumbnail_holder
+                a(href="{% url 'challenge_details'  challenge.id %}").thumbnail_holder
                   .yt_link.hide= challenge.get_thumbnail
                 .title
                   a(href="{% url 'challenge_details'  challenge.id %}").challenge_title= challenge.title
